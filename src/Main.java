@@ -1,13 +1,45 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import java.util.Random;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int secretNumber = random.nextInt(100) + 1;
+
+        int guess = 0;
+        int attempts = 0;
+        System.out.println("Number Guessing Game");
+        System.out.println("--------------------");
+        System.out.println();
+        System.out.println("I am thinking of a number between 1 and 100.");
+        while (guess != secretNumber) {
+
+            System.out.print("Enter your guess: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a whole number!!");
+                scanner.next();
+                continue;
+            }
+
+            guess = scanner.nextInt();
+            if (guess < 1 || guess > 100) {
+                System.out.println("Invalid guess. Please enter a number between 1 and 100");
+                continue;
+            }
+            attempts++;
+
+            if (guess > secretNumber) {
+                System.out.println("Too high. Try again.");
+            } else if (guess < secretNumber) {
+                System.out.println("Too low. Try again");
+            } else {
+                System.out.println("Correct! You guessed the number.");
+            }
+            System.out.println();
+        }
+        System.out.println("You won in " + attempts + " attempts.");
+        System.out.println("Thank you for playing!");
+        scanner.close();
+    }
 }
